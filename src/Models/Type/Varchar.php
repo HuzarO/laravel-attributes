@@ -48,12 +48,12 @@ class Varchar extends Value
     public function __construct(array $attributes = [])
     {
         $this->setTable(config('rinvex.attributes.tables.attribute_varchar_values'));
-        $this->mergeRules([
+        $this->setRules(array_merge($this->getRules(), [
             'content' => 'required|string|max:150',
             'attribute_id' => 'required|integer|exists:'.config('rinvex.attributes.tables.attributes').',id',
             'entity_id' => 'required|integer',
             'entity_type' => 'required|string|strip_tags|max:150',
-        ]);
+        ]));
 
         parent::__construct($attributes);
     }
